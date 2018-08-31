@@ -9,6 +9,8 @@ import user from '../view/system/user'
 import request from '../view/system/request'
 import task from '../view/system/task'
 import add from '../components/add-law-person'
+import LawPage from '../view/law-page/index.vue'
+
 
 
 Vue.use(Router)
@@ -19,6 +21,11 @@ const router = new Router({
       {
           path: '/',
           component:homePage
+      },
+      {
+        path: '/law',
+        name: 'LawPage',
+        component: LawPage
       },
       {
         path: '/essential',
