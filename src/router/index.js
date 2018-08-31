@@ -8,19 +8,22 @@ import role from '../view/system/role'
 import user from '../view/system/user'
 import request from '../view/system/request'
 import task from '../view/system/task'
+import add from '../components/add-law-person'
+
+
 Vue.use(Router)
 
 const router = new Router({
     routes: [
         // 按需加载（推荐）
-        {
-            path: '/',
-            component:homePage
-        },
-        {
-          path: '/essential',
-          component: essentialData
-        },
+      {
+          path: '/',
+          component:homePage
+      },
+      {
+        path: '/essential',
+        component: essentialData
+      },
       {
         path: '/gather',
         component: gather
@@ -45,6 +48,11 @@ const router = new Router({
         path: '/task',
         component: task
       },
+      {
+        path: '/add',
+        name: 'add',
+        component: add
+      }
 
 
     ]
