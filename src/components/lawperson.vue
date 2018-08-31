@@ -60,6 +60,27 @@
           </i-form>
       </div>
       <div class="fa-tom">
+        <div class="tabel-title">
+          <span class="base-cont">基本信息</span>
+          <Button type="primary" style="font-size: 18px">
+            <template>
+              <Icon type="md-add" />
+            </template>
+            新增 </Button>
+        </div>
+        <div>
+          <Table  border :columns="columns2" :data="data3">
+            <template>
+
+            </template>
+
+
+          </Table>
+
+        </div>
+
+        <Icon type="md-create" />
+
 
       </div>
     </div>
@@ -102,6 +123,134 @@
                 label: '重庆市'
               }
             ],
+            columns2: [
+              {
+                title: '操作',
+                key: 'name',
+                width: 60,
+                fixed: 'left',
+                render: (h,params) => {
+                  return h('div', [
+                      h('Poptip', {
+                        props: {
+                          trigger: 'hover',
+                          title: '编辑',
+                          placement: 'top'
+                        },
+                        style: {
+                          textAlign: 'center',
+                          padding: '0px',
+                        }
+                      },[
+                        h('div',[
+                          h('Icon', {
+                            props: {
+                              type: 'md-create'
+                            },
+                            style: {
+
+                            }
+                          })
+                        ])
+                      ])
+                  ],
+
+
+
+                  );
+                }
+              },
+              {
+                title: '主数据编码',
+                key: 'age',
+                width: 100
+              },
+              {
+                title: '交易方编码',
+                key: 'province',
+                width: 100
+              },
+              {
+                title: '财务系统编码',
+                key: 'city',
+                width: 100
+              },
+              {
+                title: '公司简称',
+                key: 'address',
+                width: 200
+              },
+              {
+                title: '公司全称',
+                key: 'zip',
+                width: 100
+              },
+              {
+                title: '记账本位币',
+                key: 'zip',
+                width: 100
+              },
+              {
+                title: '记账本位币说明',
+                key: 'zip',
+                width: 100
+              },
+              {
+                title: '国家',
+                key: 'zip',
+                width: 100
+              },
+              {
+                title: '地区',
+                key: 'zip',
+                width: 100
+              },
+              {
+                title: '启用',
+                key: 'zip',
+                width: 100
+              },{
+                title: '来源',
+                key: 'zip',
+                fixed: 'right',
+                width: 100
+              },
+            ],
+            data3: [
+              {
+                name: 'iii',
+                age: 18,
+                type: 'html',
+                address: 'New York No. 1 Lake Park',
+                province: 'America',
+                city: 'New York',
+                zip: 100000
+              },
+              {
+                name: 'Jim Green',
+                age: 24,
+                address: 'Washington, D.C. No. 1 Lake Park',
+                province: 'America',
+                city: 'Washington, D.C.',
+                zip: 100000
+              },
+              {
+                name: 'Joe Black',
+                age: 30,
+                address: 'Sydney No. 1 Lake Park',
+                province: 'Australian',
+                city: 'Sydney',
+                zip: 100000
+              },
+              {
+                name: 'Jon Snow',
+                age: 26,
+                address: 'Ottawa No. 2 Lake Park',
+                province: 'Canada',
+                city: 'Ottawa',
+                zip: 100000
+              }
+            ]
           }
         },
         methods: {
@@ -110,6 +259,9 @@
           },
           handleReset() {
 
+          },
+          show() {
+            console.log('test');
           }
         }
     }
@@ -127,13 +279,29 @@
     background: #ffffff;
     box-shadow: 0 2px 4px 0;
     border-radius: 4px;
+    padding-top: 27px;
   }
   .fa-tom{
-    height: 754px;
     margin-top: 12px;
     background: #ffffff;
     box-shadow: 0 2px 4px 0;
     border-radius: 4px;
+    padding:27px 32px;
+    font-size: 18px;
+  }
+  .tabel-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+
+  }
+  .base-cont {
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    font-size: 18px;
+    padding-bottom: 5px;
+    color: rgba(0,0,0,.85);
+    border-bottom: 2px solid #3c8cff;
   }
   .fa-top , .fa-tom {
     /*display: flex;*/
