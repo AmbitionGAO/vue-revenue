@@ -23,32 +23,6 @@
         <MenuItem name="2-4" @click.native="gotoAddress('/counterparty')" :class="{on : this.$route.path==='/counterparty'}">交易方</MenuItem>
         <MenuItem name="2-5" @click.native="gotoAddress('/dictionary')" :class="{on : this.$route.path==='/dictionary'}">数据字典</MenuItem>
       </Submenu>
-
-
-      <!--<Submenu name="3">-->
-      <!--<template slot="title">-->
-      <!--<Icon type="ios-card-outline" />-->
-      <!--付款管理-->
-      <!--</template>-->
-      <!--<MenuGroup title="使用">-->
-      <!--<MenuItem name="3-1">新增和启动</MenuItem>-->
-      <!--<MenuItem name="3-2">活跃分析</MenuItem>-->
-      <!--<MenuItem name="3-3">时段分析</MenuItem>-->
-      <!--</MenuGroup>-->
-      <!--<MenuGroup title="留存">-->
-      <!--<MenuItem name="3-4">用户留存</MenuItem>-->
-      <!--<MenuItem name="3-5">流失用户</MenuItem>-->
-      <!--</MenuGroup>-->
-      <!--</Submenu>-->
-      <!--<Submenu name="4">-->
-      <!--<template slot="title">-->
-      <!--<Icon><img src="../assets/img/cny.svg" width="14" height="14 "></Icon>-->
-      <!--<Icon custom="i-icon" size="14" />-->
-      <!--收入管理-->
-      <!--</template>-->
-      <!--<MenuItem name="1-1" @click.native="gotoAddress('/gather')" :class="{on : this.$route.path==='/gather'}">收入管理</MenuItem>-->
-      <!--</Submenu>-->
-
       <Submenu name="5">
         <template slot="title">
           <Icon type="ios-card" />
@@ -56,14 +30,6 @@
         </template>
         <MenuItem name="2-1" @click.native="gotoAddress('/gather')" :class="{on : this.$route.path==='/gather'}">收款管理</MenuItem>
       </Submenu>
-      <!--<Submenu name="6">-->
-      <!--<template slot="title">-->
-      <!--<Icon type="ios-list-box-outline" />-->
-      <!--会员管理-->
-      <!--</template>-->
-      <!--<MenuItem name="2-1">新增用户</MenuItem>-->
-      <!--<MenuItem name="2-2">活跃用户</MenuItem>-->
-      <!--</Submenu>-->
       <Submenu name="7">
         <template slot="title">
           <Icon type="ios-calculator-outline" />
