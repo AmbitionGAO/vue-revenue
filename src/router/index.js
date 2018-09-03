@@ -10,6 +10,7 @@ import request from '../view/system/request'
 import task from '../view/system/task'
 import add from '../components/add-law-person'
 import LawPage from '../view/law-page/index.vue'
+import kpcx from '../view/law-page/kpsqcx.vue'
 
 
 
@@ -59,7 +60,13 @@ const router = new Router({
         path: '/add',
         name: 'add',
         component: add
+      },
+      {
+        path: '/kpcx',
+        name: 'kpcx',
+        component: kpcx
       }
+
 
 
     ]

@@ -3,33 +3,33 @@
       <div class="fa-top">
           <i-form :model="formTop" label-position="top" >
             <div class="one-line">
-              <Form-item label="标题">
-                <i-input :value.sync="formTop.input1" ></i-input>
+              <Form-item label="公司简称">
+                <i-input :value.sync="formTop.input1" placeholder="请输入公司名称" ></i-input>
               </Form-item>
-              <Form-item label="标题名称">
-                <i-input :value.sync="formTop.input2" ></i-input>
+              <Form-item label="公司全称">
+                <i-input :value.sync="formTop.input2" placeholder="请输入公司全称" ></i-input>
               </Form-item>
-              <Form-item label="标题名称对齐">
-                <i-input :value.sync="formTop.input3"></i-input>
+              <Form-item label="主数据编码">
+                <i-input :value.sync="formTop.input3" placeholder="请输入主数据编码"></i-input>
               </Form-item>
             </div>
             <div class="one-line" >
-              <Form-item label="城市" prop="city">
-                <i-select :model.sync="formTop.city" placeholder="请选择所在地">
+              <Form-item label="交易方编码" prop="city">
+                <i-select :model.sync="formTop.city" placeholder="请输入交易方编码">
                   <i-option value="beijing">北京市</i-option>
                   <i-option value="shanghai">上海市</i-option>
                   <i-option value="shenzhen">深圳市</i-option>
                 </i-select>
               </Form-item>
-              <Form-item label="城市" prop="city">
-                <i-select :model.sync="formTop.city" placeholder="请选择所在地">
+              <Form-item label="来源" prop="city">
+                <i-select :model.sync="formTop.city" placeholder="请选择来源">
                   <i-option value="beijing">北京市</i-option>
                   <i-option value="shanghai">上海市</i-option>
                   <i-option value="shenzhen">深圳市</i-option>
                 </i-select>
               </Form-item>
-              <Form-item label="城市" prop="city">
-                <i-select :model.sync="formTop.city" placeholder="请选择所在地">
+              <Form-item label="财务系统编码" prop="city">
+                <i-select :model.sync="formTop.city" placeholder="请输入财务系统编码">
                   <i-option value="beijing">北京市</i-option>
                   <i-option value="shanghai">上海市</i-option>
                   <i-option value="shenzhen">深圳市</i-option>
@@ -37,11 +37,11 @@
               </Form-item>
             </div>
             <div class="one-line">
-              <Form-item label="城市" prop="city" >
-                <i-select :model.sync="formTop.city" placeholder="请选择所在地">
-                  <i-option value="beijing">北京市</i-option>
-                  <i-option value="shanghai">上海市</i-option>
-                  <i-option value="shenzhen">深圳市</i-option>
+              <Form-item label="启用" prop="city" >
+                <i-select :model.sync="formTop.city" placeholder="请选择启用状态">
+                  <i-option value="yes">是</i-option>
+                  <i-option value="no">否</i-option>
+
                 </i-select>
               </Form-item>
               <div></div>
@@ -62,7 +62,7 @@
       <div class="fa-tom">
         <div class="tabel-title">
           <span class="base-cont">基本信息</span>
-          <Button type="primary" style="font-size: 18px">
+          <Button type="primary" style="font-size: 18px" @click="xzym">
             <template>
               <Icon type="md-add" />
             </template>
@@ -81,8 +81,14 @@
 
         <Icon type="md-create" />
 
+        <div class="page">
+          <template>
+            <Page :total="100" show-sizer show-elevator class-name="op" @on-change="changepage"/>
+          </template>
+        </div>
 
       </div>
+
     </div>
 </template>
 
@@ -262,16 +268,29 @@
           },
           show() {
             console.log('test');
+          },
+          changepage(){
+            alert(1)
+          },
+          xzym(){
+            this.$router.push('/add')
           }
+
+
         }
     }
 </script>
-
+<style>
+  .ivu-page-item-active {
+    background: #bfbfbf;
+    border: none;
+    border-color: #bfbfbf;
+  }
+</style>
 <style scoped>
   .frzt{
     width:100%;
     background:#f8f8f8;
-
   }
   .fa-top{
     width: 100%;
@@ -288,6 +307,7 @@
     border-radius: 4px;
     padding:27px 32px;
     font-size: 18px;
+
   }
   .tabel-title {
     display: flex;
@@ -310,6 +330,12 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+  }
+.page{
+  text-align: right;
+}
+  .op{
+    font-size: 12px;
   }
 
 
