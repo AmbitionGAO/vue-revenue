@@ -4,7 +4,7 @@
       <Submenu name="1">
         <template slot="title">
           <Icon type="ios-desktop-outline" />
-          系统管理
+          系统管理123
         </template>
         <MenuItem name="1-1" @click.native="gotoAddress('/menu')" :class="{on : this.$route.path==='/menu'}">用户管理</MenuItem>
         <MenuItem name="1-2" @click.native="gotoAddress('/role')" :class="{on : this.$route.path==='/role'}">角色管理</MenuItem>
