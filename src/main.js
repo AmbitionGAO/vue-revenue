@@ -16,7 +16,7 @@ Vue.prototype.$http = HTTP
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
-    // store,
+    store,
     router,
     render: h => h(App)
 })

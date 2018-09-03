@@ -1,10 +1,11 @@
 <template>
     <div class="add-wrapper">
-      <div style="padding: 68px">
-        <Form ref="formValidate" label-position="top" :model="formValidate" :rules="ruleValidate" >
+      <h3>法人主体新增</h3>
+      <div style="padding:30px 68px">
+        <Form ref="formValidate" label-position="top" :model="formValidate" :rules="checking" >
           <div class="one-line-select">
             <FormItem label="来源：" prop="ly">
-              <Select v-model="formValidate.ly" placeholder="请选择来源">
+              <Select v-model="formValidate.ly" placeholder="请选择来源" :rule="checking.ly">
                 <Option value="beijing">1</Option>
                 <Option value="shanghai">2</Option>
                 <Option value="shenzhen">3</Option>
@@ -19,13 +20,13 @@
           </div>
           <div class="one-line-select">
             <FormItem label="财务系统编码：" prop="city">
-              <Input v-model="formValidate.city" placeholder="请输入财务系统编码"></Input>
+              <Input v-model="formValidate.city" :rule="checking.city" placeholder="请输入财务系统编码"></Input>
             </FormItem>
             <FormItem label="公司简称" prop="name">
-              <Input v-model="formValidate.name" placeholder="公司简称"></Input>
+              <Input v-model="formValidate.name" :rule="checking.name" placeholder="公司简称"></Input>
             </FormItem>
             <FormItem label="公司全称：" prop="qc" >
-              <Input v-model="formValidate.qc" placeholder="请输入公司全称"></Input>
+              <Input v-model="formValidate.qc" :rule="checking.qc" placeholder="请输入公司全称"></Input>
             </FormItem>
           </div>
           <div class="one-line-select">
@@ -45,14 +46,12 @@
             </FormItem>
 
             <FormItem label="启用" prop="ts">
-              <Select v-model="formValidate.ts" placeholder="请选择启用状态">
+              <Select v-model="formValidate.ts" :rules="checking.ts" placeholder="请选择启用状态">
                 <Option value="yes">是</Option>
                 <Option value="no">否</Option>
               </Select>
             </FormItem>
-            <FormItem label="记账本位币说明" prop="info" v-show="isShow" class="dis">
-              <Input v-model="formValidate.name" placeholder="请输入"></Input>
-            </FormItem>
+            <div class="ivu-form-item"></div>
 
           </div>
         </Form>
@@ -70,10 +69,13 @@
 </template>
 
 <script>
+    import checking from '../util/check';
+
     export default {
       name: "add-law-person",
       data () {
         return {
+          checking,
           modal5: false,
           formValidate: {
             name: '',
@@ -85,15 +87,6 @@
             time: '',
             desc: '',
             wayCode: '',
-          },
-          ruleValidate: {
-            city: [
-              { required: true, message: 'Please select the city', trigger: 'change' }
-            ],
-            mail: [
-              { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' },
-              { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
-            ],
           },
           isShow:true
 
@@ -138,8 +131,8 @@
     align-items: center;
   }
   .one-line-select > .ivu-form-item {
-    width: 29%;
-    margin-left: 0.58rem;
+    display: inline-block;
+    width: 28%;
   }
   .dis{
     display: none;

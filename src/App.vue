@@ -1,8 +1,13 @@
 <template>
     <div id="app">
-      <Header></Header>
-      <side-nav></side-nav>
-      <router-view/>
+        <Header class="header-cont"></Header>
+        <div class="cont-wrapper">
+          <side-nav class="side-cont" :style="{height: sideHeight + 'px'}"></side-nav>
+          <Col span="20">
+            <router-view class="view-cont"></router-view>
+          </Col>
+        </div>
+
     </div>
 </template>
 
@@ -15,7 +20,7 @@ export default {
   components: {SideNav, Header},
   data() {
     return {
-
+      sideHeight: document.documentElement.clientHeight - 64,
     };
   }
 };
@@ -30,6 +35,12 @@ export default {
   body{
     background: #f8f8f8;
     font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  }
+  .cont-wrapper {
+  }
+  .side-cont {
+  }
+  .view-cont {
   }
 </style>
 
