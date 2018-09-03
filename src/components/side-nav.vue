@@ -1,32 +1,27 @@
 <template>
   <Col span="4" class="side-nav" >
-    <Menu :theme="'light'" :open-names="['5']" accordion width="auto">
+    <Menu :theme="'light'" accordion width="auto">
       <Submenu name="1">
         <template slot="title">
           <Icon type="ios-desktop-outline" />
-          系统管理123
+          系统管理
         </template>
-        <MenuItem name="1-1" @click.native="gotoAddress('/menu')" :class="{on : this.$route.path==='/menu'}">用户管理</MenuItem>
+        <MenuItem name="1-1" @click.native="gotoAddress('/user')" :class="{on : this.$route.path==='/user'}">用户管理</MenuItem>
         <MenuItem name="1-2" @click.native="gotoAddress('/role')" :class="{on : this.$route.path==='/role'}">角色管理</MenuItem>
-        <MenuItem name="1-3" @click.native="gotoAddress('/user')" :class="{on : this.$route.path==='/user'}">菜单管理</MenuItem>
+        <MenuItem name="1-3" @click.native="gotoAddress('/menu')" :class="{on : this.$route.path==='/menu'}">菜单管理</MenuItem>
         <MenuItem name="1-4" @click.native="gotoAddress('/request')" :class="{on : this.$route.path==='/request'}">请求管理</MenuItem>
-        <MenuItem name="1-4" @click.native="gotoAddress('/task')" :class="{on : this.$route.path==='/task'}">任务调度</MenuItem>
+        <MenuItem name="1-5" @click.native="gotoAddress('/task')" :class="{on : this.$route.path==='/task'}">任务调度</MenuItem>
       </Submenu>
       <Submenu name="2">
         <template slot="title">
           <Icon type="ios-stats" />
           基础数据
         </template>
-        <MenuItem name="2-1">法人主体</MenuItem>
-        <MenuItem name="2-2" @click.native="gotoAddress('/')" :class="{on : this.$route.path==='/'}">营收业务期间</MenuItem>
-        <MenuItem name="2-3" @click.native="gotoAddress('/essential')" :class="{on : this.$route.path==='/essential'}">业务线会计期控制</MenuItem>
-        <MenuItem name="2-4">税种税率（销项）</MenuItem>
-        <MenuItem name="2-5">收入类型税选项</MenuItem>
-        <MenuItem name="2-6">汇率</MenuItem>
-        <MenuItem name="2-7">银行账号</MenuItem>
-        <MenuItem name="2-8">交易方</MenuItem>
-        <MenuItem name="2-9">映射集</MenuItem>
-        <MenuItem name="2-10">程序</MenuItem>
+        <MenuItem name="2-1" @click.native="gotoAddress('/legal')" :class="{on : this.$route.path==='/legal'}">法人主体</MenuItem>
+        <MenuItem name="2-2" @click.native="gotoAddress('/exchange')" :class="{on : this.$route.path==='/exchange'}">汇率</MenuItem>
+        <MenuItem name="2-3" @click.native="gotoAddress('/financing')" :class="{on : this.$route.path==='/financing'}">金融机构</MenuItem>
+        <MenuItem name="2-4" @click.native="gotoAddress('/counterparty')" :class="{on : this.$route.path==='/counterparty'}">交易方</MenuItem>
+        <MenuItem name="2-5" @click.native="gotoAddress('/dictionary')" :class="{on : this.$route.path==='/dictionary'}">数据字典</MenuItem>
       </Submenu>
 
 
@@ -59,7 +54,7 @@
           <Icon type="ios-card" />
           收款管理
         </template>
-        <MenuItem name="2-1">收款管理</MenuItem>
+        <MenuItem name="2-1" @click.native="gotoAddress('/gather')" :class="{on : this.$route.path==='/gather'}">收款管理</MenuItem>
       </Submenu>
       <!--<Submenu name="6">-->
       <!--<template slot="title">-->
@@ -74,11 +69,13 @@
           <Icon type="ios-calculator-outline" />
           报表管理
         </template>
-        <MenuItem name="7-1">我方代收款明细表</MenuItem>
-        <MenuItem name="7-2">交易方代收款明细表</MenuItem>
+        <MenuItem name="7-1" @click.native="gotoAddress('/ourAgent')" :class="{on : this.$route.path==='/ourAgent'}">我方代收款明细表</MenuItem>
+        <MenuItem name="7-2" @click.native="gotoAddress('/otherAgent')" :class="{on : this.$route.path==='/otherAgent'}">交易方代收款明细表</MenuItem>
+        <MenuItem name="7-3" @click.native="gotoAddress('/recognition')" :class="{on : this.$route.path==='/recognition'}">认款明细表</MenuItem>
       </Submenu>
     </Menu>
   </Col>
+
 </template>
 
 <script>
@@ -110,8 +107,6 @@
     font-family: "custom-font";
     src: url('../assets/img/cny.svg');
   }
-  .i-icon{
-    font-family: 'custom-font' !important;
-  }
+
 
 </style>
