@@ -73,6 +73,8 @@
     font-family: "custom-font";
     src: url('../assets/img/cny.svg');
   }
-
+  .ivu-menu{
+    height:100%;
+  }
 
 </style>

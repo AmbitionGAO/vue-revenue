@@ -2,13 +2,13 @@
   <div class="index-main">
     <div>
       <Tabs :animated="false" style="padding: 32px" >
-        <Tab-pane label="营收业务期间">erhtdfbvxh</Tab-pane>
-        <Tab-pane label="法人主体">
+        <!--<Tab-pane label="营收业务期间">erhtdfbvxh</Tab-pane>-->
+        <!--<Tab-pane label="法人主体">-->
           <LawPerson></LawPerson>
-        </Tab-pane>
-        <Tab-pane label="收入管理新增"></Tab-pane>
-        <Tab-pane label="付款管理"></Tab-pane>
-        <Tab-pane label="付款管理新增"></Tab-pane>
+        <!--</Tab-pane>-->
+        <!--<Tab-pane label="收入管理新增"></Tab-pane>-->
+        <!--<Tab-pane label="付款管理"></Tab-pane>-->
+        <!--<Tab-pane label="付款管理新增"></Tab-pane>-->
       </Tabs>
     </div>
 
@@ -19,7 +19,7 @@
 <script>
   import Header from "../../components/header";
   import SideNav from "../../components/side-nav";
-  import LawPerson from "../../components/lawperson"
+  import LawPerson from "./components/lawperson"
 
   export default {
     name: "Index",

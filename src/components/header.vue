@@ -1,8 +1,10 @@
 <template xmlns="">
+  <Layout>
+
     <div class="header">
         <img src="../assets/img/logo.png" class="logo"/>
         <div class="line">
-          <Icon type="md-list" size="23" color="rgba(0,0,0,0.65)"/>
+          <Icon type="md-list" size="23" color="rgba(0,0,0,0.65)" @click.native="collapsedSider" :class="rotateIcon"/>
         </div>
         <div class="font">
           <span>营收中心</span><span>Revenue Center</span>
@@ -11,7 +13,6 @@
           <img src="../assets/img/headIcon.jpg" class="head-icon"/>
           <span>木杉</span>
         </div>
-
         <Dropdown class="pull-down-list">
           <a href="javascript:void(0)">
             角色
@@ -27,11 +28,17 @@
         </Dropdown>
         <Button type="text" class="esc">退出</Button>
     </div>
+  </Layout>
 </template>
 
 <script>
     export default {
-        name: "Header"
+      name: "Header",
+      methods: {
+        collapsedSider () {
+          this.$refs.side1.toggleCollapse();
+        }
+      }
     }
 </script>
 
@@ -109,3 +116,97 @@
 
 
 </style>
+<!--<Submenu name="1" >-->
+<!--<template slot="title">-->
+<!--<Icon type="ios-desktop-outline" />-->
+<!--<span>系统管理</span>-->
+<!--</template>-->
+<!--<MenuItem name="1-1" @click.native="gotoAddress('/user')">用户管理</MenuItem>-->
+<!--<MenuItem name="1-2" @click.native="gotoAddress('/role')">角色管理</MenuItem>-->
+<!--<MenuItem name="1-3" @click.native="gotoAddress('/menu')">菜单管理</MenuItem>-->
+<!--<MenuItem name="1-4" @click.native="gotoAddress('/request')">请求管理</MenuItem>-->
+<!--<MenuItem name="1-5" @click.native="gotoAddress('/task')">任务调度</MenuItem>-->
+<!--</Submenu>-->
+<!--<Submenu name="2">-->
+<!--<template slot="title">-->
+<!--<Icon type="ios-stats" />-->
+<!--<span>基础数据</span>-->
+<!--</template>-->
+<!--<MenuItem name="2-1" @click.native="gotoAddress('/legal')">法人主体</MenuItem>-->
+<!--<MenuItem name="2-2" @click.native="gotoAddress('/exchange')">汇率</MenuItem>-->
+<!--<MenuItem name="2-3" @click.native="gotoAddress('/financing')">金融机构</MenuItem>-->
+<!--<MenuItem name="2-4" @click.native="gotoAddress('/counterparty')">交易方</MenuItem>-->
+<!--<MenuItem name="2-5" @click.native="gotoAddress('/dictionary')">数据字典</MenuItem>-->
+<!--</Submenu>-->
+<!--<Submenu name="3">-->
+<!--<template slot="title">-->
+<!--<Icon type="ios-card" />-->
+<!--<span>收款管理</span>-->
+<!--</template>-->
+<!--<MenuItem name="3-1" @click.native="gotoAddress('/gather')">收款管理</MenuItem>-->
+<!--</Submenu>-->
+<!--<Submenu name="4">-->
+<!--<template slot="title">-->
+<!--<Icon type="ios-calculator-outline" />-->
+<!--<span>报表管理</span>-->
+<!--</template>-->
+<!--<MenuItem name="4-1" @click.native="gotoAddress('/ourAgent')">我方代收款明细表</MenuItem>-->
+<!--<MenuItem name="4-2" @click.native="gotoAddress('/otherAgent')">交易方代收款明细表</MenuItem>-->
+<!--<MenuItem name="4-3" @click.native="gotoAddress('/recognition')">认款明细表</MenuItem>-->
+<!--</Submenu>-->
+
+
+<!--<MenuItem name="1-1" >-->
+  <!--<Dropdown>-->
+    <!--<a href="javascript:void(0)">-->
+      <!--<Icon type="ios-desktop-outline" />-->
+      <!--<span>系统管理</span>-->
+    <!--</a>-->
+    <!--<DropdownMenu slot="list" class="dropdown">-->
+      <!--<DropdownItem @click.native="gotoAddress('/user')">用户管理</DropdownItem>-->
+      <!--<DropdownItem @click.native="gotoAddress('/role')">角色管理</DropdownItem>-->
+      <!--<DropdownItem @click.native="gotoAddress('/menu')">菜单管理</DropdownItem>-->
+      <!--<DropdownItem @click.native="gotoAddress('/request')">请求管理</DropdownItem>-->
+      <!--<DropdownItem @click.native="gotoAddress('/task')">任务调度</DropdownItem>-->
+    <!--</DropdownMenu>-->
+  <!--</Dropdown>-->
+<!--</MenuItem>-->
+<!--<MenuItem name="1-2">-->
+  <!--<Dropdown >-->
+    <!--<a href="javascript:void(0)">-->
+      <!--<Icon type="ios-stats" />-->
+      <!--<span>基础数据</span>-->
+    <!--</a>-->
+    <!--<DropdownMenu slot="list" class="dropdown">-->
+      <!--<DropdownItem @click.native="gotoAddress('/legal')">法人主体</DropdownItem>-->
+      <!--<DropdownItem @click.native="gotoAddress('/exchange')">汇率</DropdownItem>-->
+      <!--<DropdownItem @click.native="gotoAddress('/financing')">金融机构</DropdownItem>-->
+      <!--<DropdownItem @click.native="gotoAddress('/counterparty')">交易方</DropdownItem>-->
+      <!--<DropdownItem @click.native="gotoAddress('/dictionary')">数据字典</DropdownItem>-->
+    <!--</DropdownMenu>-->
+  <!--</Dropdown>-->
+<!--</MenuItem>-->
+<!--<MenuItem name="1-3">-->
+  <!--<Dropdown >-->
+    <!--<a href="javascript:void(0)">-->
+      <!--<Icon type="ios-card" />-->
+      <!--<span>收款管理</span>-->
+    <!--</a>-->
+    <!--<DropdownMenu slot="list" class="dropdown">-->
+      <!--<DropdownItem @click.native="gotoAddress('/gather')">收款管理</DropdownItem>-->
+    <!--</DropdownMenu>-->
+  <!--</Dropdown>-->
+<!--</MenuItem>-->
+<!--<MenuItem name="1-4">-->
+  <!--<Dropdown >-->
+    <!--<a href="javascript:void(0)">-->
+      <!--<Icon type="ios-calculator-outline" />-->
+      <!--<span>报表管理</span>-->
+    <!--</a>-->
+    <!--<DropdownMenu slot="list" class="dropdown" :style="{'font-size':'0.13rem'}">-->
+      <!--<DropdownItem @click.native="gotoAddress('/ourAgent')">我方代收款明细表</DropdownItem >-->
+      <!--<DropdownItem @click.native="gotoAddress('/otherAgent')">交易方代收款明细表</DropdownItem>-->
+      <!--<DropdownItem @click.native="gotoAddress('/recognition')">认款明细表</DropdownItem>-->
+    <!--</DropdownMenu>-->
+  <!--</Dropdown>-->
+<!--</MenuItem>-->
