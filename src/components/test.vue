@@ -35,100 +35,19 @@
       <Layout :style="{'margin-top': '0.07rem'}">
         <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed" accordion>
           <Menu theme="light" width="auto" :class="menuitemClasses" :style="{height: sideHeight + 'px'}" accordion v-show=" isCollapsed">
-            <MenuItem name="1-1" >
-              <Dropdown >
-              <a href="javascript:void(0)">
-              <Icon type="ios-desktop-outline" />
-              <span>系统管理</span>
-              </a>
-              <DropdownMenu slot="list" class="dropdown">
-                  <DropdownItem @click.native="gotoAddress('/user')">用户管理</DropdownItem>
-                  <DropdownItem @click.native="gotoAddress('/role')">角色管理</DropdownItem>
-                  <DropdownItem @click.native="gotoAddress('/menu')">菜单管理</DropdownItem>
-                  <DropdownItem @click.native="gotoAddress('/request')">请求管理</DropdownItem>
-                  <DropdownItem @click.native="gotoAddress('/task')">任务调度</DropdownItem>
-              </DropdownMenu>
-              </Dropdown>
-            </MenuItem>
-            <MenuItem name="1-2">
-              <Dropdown >
+            <MenuItem v-for="item in menuData" :name="item.name">
+              <Dropdown>
                 <a href="javascript:void(0)">
-                  <Icon type="ios-stats" />
-                  <span>基础数据</span>
+                  <Icon :type="item.icon" />
+                  <span>{{item.label}}</span>
                 </a>
                 <DropdownMenu slot="list" class="dropdown">
-                  <DropdownItem @click.native="gotoAddress('/legal')">法人主体</DropdownItem>
-                  <DropdownItem @click.native="gotoAddress('/exchange')">汇率</DropdownItem>
-                  <DropdownItem @click.native="gotoAddress('/financing')">金融机构</DropdownItem>
-                  <DropdownItem @click.native="gotoAddress('/counterparty')">交易方</DropdownItem>
-                  <DropdownItem @click.native="gotoAddress('/dictionary')">数据字典</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </MenuItem>
-            <MenuItem name="1-3">
-              <Dropdown >
-                <a href="javascript:void(0)">
-                  <Icon type="ios-card" />
-                  <span>收款管理</span>
-                </a>
-                <DropdownMenu slot="list" class="dropdown">
-                  <DropdownItem @click.native="gotoAddress('/gather')">收款管理</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </MenuItem>
-            <MenuItem name="1-4">
-              <Dropdown >
-                <a href="javascript:void(0)">
-                  <Icon type="ios-calculator-outline" />
-                  <span>报表管理</span>
-                </a>
-                <DropdownMenu slot="list" class="dropdown" :style="{'font-size':'0.13rem'}">
-                  <DropdownItem @click.native="gotoAddress('/ourAgent')">我方代收款明细表</DropdownItem >
-                  <DropdownItem @click.native="gotoAddress('/otherAgent')">交易方代收款明细表</DropdownItem>
-                  <DropdownItem @click.native="gotoAddress('/recognition')">认款明细表</DropdownItem>
+                  <DropdownItem v-for="mi in item.menuitems" :name="mi.name" @click.native="gotoAddress(mi.url)">{{mi.label}}</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </MenuItem>
           </Menu>
           <Menu theme="light" width="auto" :class="menuitemClasses" :style="{height: sideHeight + 'px'}" accordion v-show="!isCollapsed">
-            <!--<Submenu name="1" >-->
-            <!--<template slot="title">-->
-              <!--<Icon type="ios-desktop-outline" />-->
-              <!--<span>系统管理</span>-->
-            <!--</template>-->
-              <!--<MenuItem name="1-1" @click.native="gotoAddress('/user')">用户管理</MenuItem>-->
-              <!--<MenuItem name="1-2" @click.native="gotoAddress('/role')">角色管理</MenuItem>-->
-              <!--<MenuItem name="1-3" @click.native="gotoAddress('/menu')">菜单管理</MenuItem>-->
-              <!--<MenuItem name="1-4" @click.native="gotoAddress('/request')">请求管理</MenuItem>-->
-              <!--<MenuItem name="1-5" @click.native="gotoAddress('/task')">任务调度</MenuItem>-->
-            <!--</Submenu>-->
-            <!--<Submenu name="2">-->
-              <!--<template slot="title">-->
-                <!--<Icon type="ios-stats" />-->
-                <!--<span>基础数据</span>-->
-              <!--</template>-->
-              <!--<MenuItem name="2-1" @click.native="gotoAddress('/legal')">法人主体</MenuItem>-->
-              <!--<MenuItem name="2-2" @click.native="gotoAddress('/exchange')">汇率</MenuItem>-->
-              <!--<MenuItem name="2-3" @click.native="gotoAddress('/financing')">金融机构</MenuItem>-->
-              <!--<MenuItem name="2-4" @click.native="gotoAddress('/counterparty')">交易方</MenuItem>-->
-              <!--<MenuItem name="2-5" @click.native="gotoAddress('/dictionary')">数据字典</MenuItem>-->
-            <!--</Submenu>-->
-            <!--<Submenu name="3">-->
-              <!--<template slot="title">-->
-                <!--<Icon type="ios-card" />-->
-                <!--<span>收款管理</span>-->
-              <!--</template>-->
-              <!--<MenuItem name="3-1" @click.native="gotoAddress('/gather')">收款管理</MenuItem>-->
-            <!--</Submenu>-->
-            <!--<Submenu name="4">-->
-              <!--<template slot="title">-->
-                <!--<Icon type="ios-calculator-outline" />-->
-                <!--<span>报表管理</span>-->
-              <!--</template>-->
-              <!--<MenuItem name="4-1" @click.native="gotoAddress('/ourAgent')">我方代收款明细表</MenuItem>-->
-              <!--<MenuItem name="4-2" @click.native="gotoAddress('/otherAgent')">交易方代收款明细表</MenuItem>-->
-              <!--<MenuItem name="4-3" @click.native="gotoAddress('/recognition')">认款明细表</MenuItem>-->
-            <!--</Submenu>-->
             <Submenu v-for="item in menuData" :name="item.name">
               <template slot="title">
                 <Icon :type="item.icon"></Icon><span>{{item.label}}</span>
@@ -418,6 +337,50 @@
   }
   .ivu-dropdown-item{
     font-size: 0.13rem;
+  }
+  .layout-logo{
+    width: 100px;
+    height: 40px;
+    background: #5b6270;
+    border-radius: 3px;
+    float: left;
+    position: relative;
+    top: 15px;
+    left: 20px;
+  }
+  .layout-content{
+    position:absolute;
+    right:0;
+    left:0;
+    top:90px;
+    bottom:90px;
+    margin: 15px;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 4px;
+  }
+  .layout-content-main{
+    min-height: 400px;
+    padding: 10px;
+  }
+  .layout-copy{
+    text-align: center;
+    padding: 5px 0 10px;
+    color: #9ea7b4;
+    position:absolute;
+    bottom:0;
+    right:0;
+    left:0;
+    width:100%;
+    height:90px;
+  }
+  .layout-top{
+    position:absolute;
+    top:0;
+    right:0;
+    left:0;
+    width:100%;
+    height:90px;
   }
 
 </style>
