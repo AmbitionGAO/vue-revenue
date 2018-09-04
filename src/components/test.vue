@@ -133,12 +133,20 @@
               <template slot="title">
                 <Icon :type="item.icon"></Icon><span>{{item.label}}</span>
               </template>
-              <menu-item v-for="mi in item.menuitems" :name="mi.name" @click.native="mi.click">{{mi.label}}</menu-item>
+              <menu-item v-for="mi in item.menuitems" :name="mi.name" @click.native="gotoAddress(mi.url)">{{mi.label}}</menu-item>
             </Submenu>
           </Menu>
         </Sider>
         <Content :style="{margin: '20px', background: '#fff', minHeight: '260px'}">
-          Content
+          <div class="layout-content-main" >
+            <Tabs type="card" @on-tab-remove="removeTab" @on-click="clickTab" :animated="false" :value="activeTab">
+              <template v-for="(item,index) in mainTabs">
+                <tab-pane :label="item.label" closable :name="item.name" v-if="item.show">
+                  <iframe frameborder="0" width="100%" :height="frameHeight" marginheight="0" scrolling="auto" marginwidth="0" :src="item.url"></iframe>
+                </tab-pane>
+              </template>
+            </Tabs>
+          </div>
         </Content>
       </Layout>
     </Layout>
@@ -152,35 +160,39 @@
         menuData:[
           {   label:'系统管理',name:"m1",icon:"ios-desktop-outline",
             menuitems:[
-              {name:'m1-1',label:'用户管理',click:()=>{gotoAddress('/user')}},
-              {name:'m1-2',label:'角色管理',click:"gotoAddress('/role')"},
-              {name:'m1-3',label:'菜单管理',click:'gotoAddress(\'/menu\')'},
-              {name:'m1-4',label:'请求管理',click:'gotoAddress(\'/request\')'},
-              {name:'m1-5',label:'任务调度',click:'gotoAddress(\'/task\')'},
+              {name:'m1-1',label:'用户管理',url:'/user'},
+              {name:'m1-2',label:'角色管理',url:'/role'},
+              {name:'m1-3',label:'菜单管理',url:'/menu'},
+              {name:'m1-4',label:'请求管理',url:'/request'},
+              {name:'m1-5',label:'任务调度',url:'/task'},
             ]
           },
           {   label:'基础数据',name:"m2",icon:'ios-stats',
             menuitems:[
-              {name:'m2-1',label:'法人主体',url:'http://wallimn.iteye.com'},
-              {name:'m2-2',label:'汇率',url:'m2-1.html'},
-              {name:'m2-3',label:'金融机构',url:'m2-1.html'},
-              {name:'m2-4',label:'交易方',url:'m2-1.html'},
-              {name:'m2-4',label:'数据字典',url:'m2-1.html'},
+              {name:'m2-1',label:'法人主体',url:'/legal'},
+              {name:'m2-2',label:'汇率',url:'/exchange'},
+              {name:'m2-3',label:'金融机构',url:'/financing'},
+              {name:'m2-4',label:'交易方',url:'/counterparty'},
+              {name:'m2-5',label:'数据字典',url:'/task'},
             ]
           },
           {   label:'收款管理',name:"m3",icon:'ios-card',
             menuitems:[
-              {name:'m3-1',label:'收款管理',url:'m3-1.html'},
+              {name:'m3-1',label:'收款管理',url:'/gather'},
             ]
           },
           {   label:'报表管理',name:"m4",icon:'ios-calculator-outline',
             menuitems:[
-              {name:'m4-1',label:'我方代收款明细表',url:'m4-1.html'},
-              {name:'m4-2',label:'交易方代收款明细表',url:'m4-1.html'},
-              {name:'m4-3',label:'认款明细表',url:'m4-1.html'},
+              {name:'m4-1',label:'我方代收款明细表',url:'/ourAgent'},
+              {name:'m4-2',label:'交易方代收款明细表',url:'/otherAgent'},
+              {name:'m4-3',label:'认款明细表',url:'/recognition'},
             ]
           }
         ],
+        activeTab:null,
+        mainHeight: 0,
+        frameHeight: 0,
+        mainTabs:[],
         i1:false,
         isCollapsed: false,
       sideHeight: document.documentElement.clientHeight - 64,
@@ -200,13 +212,65 @@
         ]
       }
     },
+    mounted:function(){
+      this.setFrameHeight();
+    },
     methods: {
       collapsedSider () {
         this.$refs.side1.toggleCollapse();
       },
       gotoAddress (path) {
         this.$router.push(path);
-      }
+      },
+      clickTab:function(name){
+        var vm=this;
+        vm.frameHeight -= 1;
+        //解决chrome浏览器中tab切换滚动条消失的问题。
+        window.setTimeout(function(){
+          vmvm.frameHeight=vm.frameHeight+1;
+        },100);
+      },
+      //根据名称来查找对应的菜单条目
+      getMenuItem:function(name){
+        for(var sm=0; sm<this.menuData.length; sm++){
+          for(var mi=0; mi<this.menuData[sm].menuitems.length; mi++){
+            if(this.menuData[sm].menuitems[mi].name===name)return this.menuData[sm].menuitems[mi];
+          }
+        }
+        return {};//这个应该不可能发生
+      },
+      //根据名称查找对应的Tab页。
+      getTab:function(name){
+        for(let i=0; i<this.mainTabs.length; i++){
+          if(this.mainTabs[i].name===name)return this.mainTabs[i];
+        }
+        return null;//没有找到
+      },
+      //设置Tab页不可见。
+      removeTab:function (name) {
+        var tab = this.getTab(name);
+        if(tab!=null)tab.show=false;
+        console.log("mainTabRemove, name=",name,", label=",tab.label,", url=",tab.url);
+      },
+      setFrameHeight:function(){
+        //调整掉一些补白的值
+        this.mainHeight = (document.documentElement.scrollHeight || document.body.scrollHeight)-90-90;
+        this.frameHeight = this.mainHeight-90;
+      },
+      //菜单点击
+      menuSelect:function(name){
+        this.$Message.info(name);
+        var tab = this.getTab(name);
+        if(tab==null){
+          var mi = this.getMenuItem(name);
+          var mi = $.extend({},mi,{show:true});
+          this.mainTabs.push(mi);
+        }
+        else{
+          tab.show=true;
+        }
+        this.activeTab=name;
+      },
     }
   }
 </script>
