@@ -42,7 +42,7 @@
                   <span>{{item.label}}</span>
                 </a>
                 <DropdownMenu slot="list" class="dropdown">
-                  <DropdownItem v-for="mi in item.menuitems" :name="mi.name" @click.native="gotoAddress(mi.url)">{{mi.label}}</DropdownItem>
+                  <DropdownItem v-for="mi in item.menuitems" :name="mi.name" @click.native="changetab(mi.url,mi)">{{mi.label}}</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </MenuItem>
@@ -52,14 +52,14 @@
               <template slot="title">
                 <Icon :type="item.icon"></Icon><span>{{item.label}}</span>
               </template>
-              <menu-item v-for="mi in item.menuitems" :name="mi.name" @click.native="changetab(mi.url,mi)">{{mi.label}}</menu-item>
+              <menu-item v-for="mi in item.menuitems" :name="mi.name" @click.native="changetab(mi.url,mi,mi.name)">{{mi.label}}</menu-item>
             </Submenu>
           </Menu>
         </Sider>
-        <Content :style="{margin: '20px', background: '#fff', minHeight: '260px'}">
+        <Content :style="{margin: '0.1rem', background: '#fff', minHeight: '2.60rem'}">
           <!--<div class="layout-content-main" >-->
             <!--<Tabs type="card" @on-tab-remove="removeTab" @on-click="clickTab" :animated="false" :value="activeTab">-->
-              <!--<template v-for="(item,index) in mainTabs">-->
+              <!--<template v-for="item in mainTabs">-->
                 <!--<tab-pane :label="item.label" closable :name="item.name" v-if="item.show">-->
                   <!--<iframe frameborder="0" width="100%" :height="frameHeight" marginheight="0" scrolling="auto" marginwidth="0" :src="item.url"></iframe>-->
                 <!--</tab-pane>-->
@@ -67,9 +67,9 @@
             <!--</Tabs>-->
           <!--</div>-->
           <Tabs type="card" closable :animated="false" :value="activeTab">
-            <template v-for="tab in tabs">
-            <TabPane :label="tab.label" :name="tab.name">
-                {{tab.label}}
+            <template v-for="tab in tabss">
+            <TabPane :label="tab.label" :name="tab.name" @click.native="gotoAddress(tab.url)">
+              <router-view></router-view>
             </TabPane>
             </template>
           </Tabs>
@@ -119,6 +119,8 @@
         mainHeight: 0,
         frameHeight: 0,
         tabs:[],
+        tabss:[],
+        mainTabs:[],
         i1:false,
         isCollapsed: false,
       sideHeight: document.documentElement.clientHeight - 64,
@@ -148,11 +150,13 @@
       gotoAddress (path) {
         this.$router.push(path);
       },
-      changetab(path,active){
+      changetab(path,active,iname){
         this.gotoAddress(path);
         this.tabs.push(active);
-        this.activeTab=name;
-      }
+        this.tabss = [... new Set(this.tabs)];
+        this.activeTab=iname;
+      },
+
     }
   }
 </script>

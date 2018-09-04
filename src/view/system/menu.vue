@@ -1,5 +1,5 @@
 <template>
-  <div>菜单管理</div>
+  <div>菜单管理123</div>
 </template>
 
 <script>
