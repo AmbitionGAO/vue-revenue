@@ -66,7 +66,8 @@
             <template>
               <Icon type="md-add" />
             </template>
-            新增 </Button>
+            新增
+          </Button>
         </div>
         <div>
           <Table  border :columns="columns2" :data="data3">

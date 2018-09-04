@@ -3,7 +3,6 @@
     <Layout>
       <Header :style="{padding: 0}" class="layout-header-bar" ref="side1">
         <div class="header">
-          <!--<img src="../assets/img/logo.png" class="logo"/>-->
           <img v-show="isCollapsed" src="../assets/img/logo-min.png" key="min-logo" class="logomin"/>
           <img v-show="!isCollapsed" src="../assets/img/logo.png" key="max-logo" class="logo"/>
           <div class="line">
@@ -95,7 +94,7 @@
           },
           {   label:'基础数据',name:"m2",icon:'ios-stats',
             menuitems:[
-              {name:'m2-1',label:'法人主体',url:'/legal'},
+              {name:'m2-1',label:'法人主体',url:'/law'},
               {name:'m2-2',label:'汇率',url:'/exchange'},
               {name:'m2-3',label:'金融机构',url:'/financing'},
               {name:'m2-4',label:'交易方',url:'/counterparty'},
