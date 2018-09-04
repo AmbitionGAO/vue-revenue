@@ -52,20 +52,27 @@
               <template slot="title">
                 <Icon :type="item.icon"></Icon><span>{{item.label}}</span>
               </template>
-              <menu-item v-for="mi in item.menuitems" :name="mi.name" @click.native="gotoAddress(mi.url)">{{mi.label}}</menu-item>
+              <menu-item v-for="mi in item.menuitems" :name="mi.name" @click.native="changetab(mi.url,mi)">{{mi.label}}</menu-item>
             </Submenu>
           </Menu>
         </Sider>
         <Content :style="{margin: '20px', background: '#fff', minHeight: '260px'}">
-          <div class="layout-content-main" >
-            <Tabs type="card" @on-tab-remove="removeTab" @on-click="clickTab" :animated="false" :value="activeTab">
-              <template v-for="(item,index) in mainTabs">
-                <tab-pane :label="item.label" closable :name="item.name" v-if="item.show">
-                  <iframe frameborder="0" width="100%" :height="frameHeight" marginheight="0" scrolling="auto" marginwidth="0" :src="item.url"></iframe>
-                </tab-pane>
-              </template>
-            </Tabs>
-          </div>
+          <!--<div class="layout-content-main" >-->
+            <!--<Tabs type="card" @on-tab-remove="removeTab" @on-click="clickTab" :animated="false" :value="activeTab">-->
+              <!--<template v-for="(item,index) in mainTabs">-->
+                <!--<tab-pane :label="item.label" closable :name="item.name" v-if="item.show">-->
+                  <!--<iframe frameborder="0" width="100%" :height="frameHeight" marginheight="0" scrolling="auto" marginwidth="0" :src="item.url"></iframe>-->
+                <!--</tab-pane>-->
+              <!--</template>-->
+            <!--</Tabs>-->
+          <!--</div>-->
+          <Tabs type="card" closable :animated="false" :value="activeTab">
+            <template v-for="tab in tabs">
+            <TabPane :label="tab.label" :name="tab.name">
+                {{tab.label}}
+            </TabPane>
+            </template>
+          </Tabs>
         </Content>
       </Layout>
     </Layout>
@@ -111,7 +118,7 @@
         activeTab:null,
         mainHeight: 0,
         frameHeight: 0,
-        mainTabs:[],
+        tabs:[],
         i1:false,
         isCollapsed: false,
       sideHeight: document.documentElement.clientHeight - 64,
@@ -141,55 +148,11 @@
       gotoAddress (path) {
         this.$router.push(path);
       },
-      clickTab:function(name){
-        var vm=this;
-        vm.frameHeight -= 1;
-        //解决chrome浏览器中tab切换滚动条消失的问题。
-        window.setTimeout(function(){
-          vmvm.frameHeight=vm.frameHeight+1;
-        },100);
-      },
-      //根据名称来查找对应的菜单条目
-      getMenuItem:function(name){
-        for(var sm=0; sm<this.menuData.length; sm++){
-          for(var mi=0; mi<this.menuData[sm].menuitems.length; mi++){
-            if(this.menuData[sm].menuitems[mi].name===name)return this.menuData[sm].menuitems[mi];
-          }
-        }
-        return {};//这个应该不可能发生
-      },
-      //根据名称查找对应的Tab页。
-      getTab:function(name){
-        for(let i=0; i<this.mainTabs.length; i++){
-          if(this.mainTabs[i].name===name)return this.mainTabs[i];
-        }
-        return null;//没有找到
-      },
-      //设置Tab页不可见。
-      removeTab:function (name) {
-        var tab = this.getTab(name);
-        if(tab!=null)tab.show=false;
-        console.log("mainTabRemove, name=",name,", label=",tab.label,", url=",tab.url);
-      },
-      setFrameHeight:function(){
-        //调整掉一些补白的值
-        this.mainHeight = (document.documentElement.scrollHeight || document.body.scrollHeight)-90-90;
-        this.frameHeight = this.mainHeight-90;
-      },
-      //菜单点击
-      menuSelect:function(name){
-        this.$Message.info(name);
-        var tab = this.getTab(name);
-        if(tab==null){
-          var mi = this.getMenuItem(name);
-          var mi = $.extend({},mi,{show:true});
-          this.mainTabs.push(mi);
-        }
-        else{
-          tab.show=true;
-        }
+      changetab(path,active){
+        this.gotoAddress(path);
+        this.tabs.push(active);
         this.activeTab=name;
-      },
+      }
     }
   }
 </script>
